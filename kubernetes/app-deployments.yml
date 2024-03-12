@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      volumes:
+      - name: app-env
+        configMap:
+          name: app-env
+      containers:
+        - name: auth
+          image: dockerhub_username/image_name:tag
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          volumeMounts:
+          - name: app-env
+            mountPath: /etc
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /v1/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
