@@ -12,6 +12,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 )
 
@@ -19,15 +20,16 @@ type echoServer struct {
 	app    *echo.Echo
 	conf   *config.ServerConfig
 	db     *gorm.DB
+	rdb    *redis.Client
 	logger echo.Logger
 }
 
-func ServerInstaceGetting(conf *config.ServerConfig, db *gorm.DB) *echoServer {
+func ServerInstaceGetting(conf *config.ServerConfig, db *gorm.DB, rdb *redis.Client) *echoServer {
 	app := echo.New()
 	app.Logger.SetLevel(log.DEBUG)
 
 	logger := app.Logger
-	return &echoServer{app, conf, db, logger}
+	return &echoServer{app, conf, db, rdb, logger}
 }
 
 func (s *echoServer) Starting() {
