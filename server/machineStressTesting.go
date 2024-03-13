@@ -83,5 +83,5 @@ func (s *echoServer) MachineStressTesting(c echo.Context) error {
 		go RunMem(20, body.Memory)
 	}
 
-	return nil
+	return c.JSON(200, map[string]string{"message": "ok"})
 }
