@@ -1,6 +1,8 @@
 package entities
 
+import "github.com/google/uuid"
+
 type Image struct {
-	ID          string `gorm:"primaryKey;autoIncrement" json:"id"`
-	ImageBase64 string `json:"iamgeBase64" validate:"required"`
+	ID          uuid.UUID `gorm:"primaryKey;autoIncrement;type:uuid" json:"id"`
+	ImageBase64 string    `json:"iamgeBase64" validate:"required"`
 }

@@ -13,7 +13,7 @@ func (s *echoServer) DataInserting(c echo.Context) error {
 	}
 
 	uuidV7, _ := uuid.NewV7()
-	reqImage.ID = uuidV7.String()
+	reqImage.ID = uuidV7
 
 	if err := s.db.Create(reqImage).Error; err != nil {
 		return err
