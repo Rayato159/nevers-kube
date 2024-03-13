@@ -16,8 +16,10 @@ var (
 
 func InstanceGetting(conf *config.DatabaseConfig) *gorm.DB {
 	once.Do(func() {
-		dsn := fmt.Sprintf("user:pass@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+		dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
+			conf.User,
 			conf.Host,
+			conf.Password,
 			conf.Port,
 			conf.DBName,
 		)
