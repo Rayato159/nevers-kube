@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+ name: clear-cache-cronjob
+spec:
+ schedule: "2 * * * *"
+ jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: clear-cache
+            image: curlimages/curl:latest
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - |
+              curl -X DELETE http://app-deployment/v1/cache
+          restartPolicy: OnFailure
