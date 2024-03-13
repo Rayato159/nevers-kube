@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: sentinel
+  namespace: default
 spec:
   serviceName: sentinel
   replicas: 3
