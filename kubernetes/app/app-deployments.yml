@@ -14,9 +14,9 @@ spec:
         app: app
     spec:
       volumes:
-      - name: app-env
+      - name: app-config
         configMap:
-          name: app-env
+          name: app-config
       containers:
         - name: app-container
           image: lookhin4181/nevers-kube-final:v1.0.1
@@ -24,8 +24,9 @@ spec:
             - containerPort: 8080
               protocol: TCP
           volumeMounts:
-          - name: app-env
+          - name: app-config
             mountPath: /etc
+            readOnly: true
           livenessProbe:
             httpGet:
               path: /v1/health

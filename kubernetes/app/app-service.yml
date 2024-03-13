@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: app-service
-  namespace: default
+ name: app-service
+ namespace: default
 spec:
-  selector:
+ selector:
     app: app-deployment
-  ports:
+ ports:
     - name: http
-			protocol: TCP
+      protocol: TCP
       port: 8080
       targetPort: 8080
-  type: ClusterIP
+ type: ClusterIP
