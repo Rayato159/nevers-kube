@@ -60,7 +60,7 @@ spec:
       volumes:
       - name: redis-config
         emptyDir: {}
-      - name:   
+      - name: config
         configMap:
           name: redis-config
       - name: config-acl
