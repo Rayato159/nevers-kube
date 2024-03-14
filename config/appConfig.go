@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 	"sync"
-	"time"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
@@ -22,10 +21,9 @@ type (
 	}
 
 	ServerConfig struct {
-		Port         int           `mapstructure:"port" validate:"required"`
-		AllowOrigins []string      `mapstructure:"allowOrigins" validate:"required"`
-		Timeout      time.Duration `mapstructure:"timeout" validate:"required"`
-		BodyLimit    string        `mapstructure:"bodyLimit" validate:"required"`
+		Port         int      `mapstructure:"port" validate:"required"`
+		AllowOrigins []string `mapstructure:"allowOrigins" validate:"required"`
+		BodyLimit    string   `mapstructure:"bodyLimit" validate:"required"`
 	}
 
 	AppConfig struct {

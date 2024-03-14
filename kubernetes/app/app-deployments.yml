@@ -44,8 +44,6 @@ spec:
           #   value: ["*"]
           - name: SERVER_BODYLIMIT
             value: "10M"
-          - name: SERVER_TIMEOUT
-            value: "30s"
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -57,14 +55,14 @@ spec:
             httpGet:
               path: /v1/health
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 3
+            periodSeconds: 3
           readinessProbe:
             httpGet:
               path: /v1/health
               port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
+            initialDelaySeconds: 3
+            periodSeconds: 3
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -77,8 +75,7 @@ data:
       port: 8080
       allowOrigins:
         - "*"
-      bodyLimit: "10M" # MiB
-      timeout: 30 # Seconds
+      bodyLimit: "10M"
       
     redis:
       host: localhost
