@@ -10,8 +10,8 @@ redis:
   port: 6379
 
 database:
-  host: localhost
+  host: 0.0.0.0
   port: 3306
   user: root
-  password: 123456
-  dbname: mydb
+  password: Pass1234
+  dbname: never-db

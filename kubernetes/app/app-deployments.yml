@@ -24,9 +24,9 @@ spec:
           # - name: DATABASE_HOST
           #   value: mysql
           - name: DATABASE_HOST
-            value: Pass1234
-          - name: DATABASE_PASSWORD
             value: mysql
+          - name: DATABASE_PASSWORD
+            value:  Pass1234
           - name: DATABASE_USER
             value: root
           
@@ -37,7 +37,7 @@ spec:
           - name: DATABASE_PORT
             value: "3306"
           - name: DATABASE_DBNAME
-            value: mydb
+            value: never-db
           - name: SERVER_PORT
             value: "8080"
           # - name: SERVER_ALLOWORIGINS

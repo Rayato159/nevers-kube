@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/Rayato159/nevers-kube/config"
 	"github.com/labstack/echo/v4"
@@ -37,6 +38,18 @@ func (s *echoServer) Starting() {
 
 	s.app.Use(middleware.Recover())
 	s.app.Use(middleware.Logger())
+	s.app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		Skipper:      middleware.DefaultSkipper,
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{echo.GET, echo.POST, echo.PUT, echo.PATCH, echo.DELETE},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
+	s.app.Use(middleware.BodyLimit(s.conf.BodyLimit))
+	s.app.Use(middleware.TimeoutWithConfig(middleware.TimeoutConfig{
+		Skipper:      middleware.DefaultSkipper,
+		ErrorMessage: "Error: Request timeout.",
+		Timeout:      s.conf.Timeout * time.Second,
+	}))
 
 	router.GET("/health", func(c echo.Context) error {
 		return c.String(http.StatusOK, "OK")
