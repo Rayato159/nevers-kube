@@ -59,8 +59,8 @@ data:
       port: 6379
       
     database:
-      host: localhost
+      host: mysql
       port: 3306
       user: root
-      password: 123456
+      password: Pass1234
       dbname: mydb
