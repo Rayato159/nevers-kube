@@ -14,19 +14,45 @@ spec:
         app: app
     spec:
       volumes:
-      - name: app-config
-        configMap:
-          name: app-config
+      # - name: app-config
+      #   configMap:
+      #     name: app-config
       containers:
         - name: app-container
           image: lookhin4181/nevers-kube-final:v1.0.1
+          env:
+          # - name: DATABASE_HOST
+          #   value: mysql
+          - name: DATABASE_HOST
+            value: Pass1234
+          - name: DATABASE_PASSWORD
+            value: mysql
+          - name: DATABASE_USER
+            value: root
+          
+          # - name: DATABASE_USER
+          #   value: root
+          # - name: DATABASE_PASSWORD
+          #   value: Pass1234
+          - name: DATABASE_PORT
+            value: "3306"
+          - name: DATABASE_DBNAME
+            value: mydb
+          - name: SERVER_PORT
+            value: "8080"
+          # - name: SERVER_ALLOWORIGINS
+          #   value: ["*"]
+          - name: SERVER_BODYLIMIT
+            value: "10M"
+          - name: SERVER_TIMEOUT
+            value: "30s"
           ports:
             - containerPort: 8080
               protocol: TCP
-          volumeMounts:
-          - name: app-config
-            mountPath: /etc
-            readOnly: true
+          # volumeMounts:
+          # - name: app-config
+          #   mountPath: /app/etc/
+          #   readOnly: true
           livenessProbe:
             httpGet:
               path: /v1/health
@@ -46,7 +72,7 @@ metadata:
   name: app-config
   namespace: default
 data:
-  config.yml: |
+  config.yaml: |
     server:
       port: 8080
       allowOrigins:
@@ -59,8 +85,8 @@ data:
       port: 6379
       
     database:
-      host: localhost
+      host: mysql
       port: 3306
       user: root
-      password: 123456
+      password: Pass1234
       dbname: mydb

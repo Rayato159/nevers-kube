@@ -5,6 +5,7 @@ import (
 	"github.com/Rayato159/nevers-kube/config"
 	"github.com/Rayato159/nevers-kube/database"
 	"github.com/Rayato159/nevers-kube/server"
+	_ "go.uber.org/automaxprocs"
 )
 
 func main() {

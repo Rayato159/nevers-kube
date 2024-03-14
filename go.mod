@@ -11,6 +11,7 @@ require (
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/redis/go-redis/v9 v9.5.1
 	github.com/spf13/viper v1.18.2
+	go.uber.org/automaxprocs v1.5.3
 	gorm.io/driver/mysql v1.5.4
 	gorm.io/gorm v1.25.7
 )
