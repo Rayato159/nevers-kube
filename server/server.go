@@ -52,7 +52,14 @@ func (s *echoServer) Starting() {
 	}))
 
 	router.GET("/health", func(c echo.Context) error {
-		return c.String(http.StatusOK, "OK")
+		s.logger.Info("Health check request received")
+		err := c.String(http.StatusOK, "OK")
+		if err != nil {
+			s.logger.Errorf("Error responding to health check: %s", err.Error())
+		} else {
+			s.logger.Error("Health check response sent successfully")
+		}
+		return err
 	})
 
 	router.GET("/cache", s.CacheGetting)
