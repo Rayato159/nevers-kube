@@ -17,5 +17,5 @@ spec:
             - /bin/sh
             - -c
             - |
-              curl -X DELETE http://app-deployment/v1/cache
+              curl -X DELETE http://app-service/v1/cache
           restartPolicy: OnFailure
