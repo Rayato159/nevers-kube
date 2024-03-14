@@ -19,7 +19,7 @@ spec:
       #     name: app-config
       containers:
         - name: app-container
-          image: lookhin4181/nevers-kube-final:v1.0.3
+          image: lookhin4181/nevers-kube-final:v1.0.4
           env:
           # - name: DATABASE_HOST
           #   value: mysql
