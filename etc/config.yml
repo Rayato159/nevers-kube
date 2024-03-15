@@ -3,15 +3,14 @@ server:
   allowOrigins:
     - "*"
   bodyLimit: "10M" # MiB
-  timeout: 30 # Seconds
   
 redis:
   host: localhost
   port: 6379
 
 database:
-  host: 0.0.0.0
+  host: localhost
   port: 3306
   user: root
   password: Pass1234
-  dbname: never-db
+  dbname: mydb

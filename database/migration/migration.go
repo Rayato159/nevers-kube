@@ -1,4 +1,4 @@
-package migration
+package main
 
 import (
 	"github.com/Rayato159/nevers-kube/config"
