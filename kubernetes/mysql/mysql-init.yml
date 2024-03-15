@@ -4,5 +4,5 @@ metadata:
   name: mysql-initdb-config
 data:
   initdb.sql: |
-    CREATE DATABASE mysql; 
+    CREATE DATABASE mydb; 
     
