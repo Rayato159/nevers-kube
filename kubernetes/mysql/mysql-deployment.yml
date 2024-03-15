@@ -18,7 +18,7 @@ spec:
         name: mysql
         env:
         - name: MYSQL_DATABASE
-          value: never-db
+          value: mysql
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
