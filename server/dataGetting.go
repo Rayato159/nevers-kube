@@ -6,13 +6,14 @@ import (
 )
 
 func (s *echoServer) DataGetting(c echo.Context) error {
-	var resp *entities.Image
+	resp := new(entities.Image)
 
 	key := c.Param("key")
 
 	result := s.db.First(resp).Where("id = ?", key)
 
 	if result.Error != nil {
+		s.logger.Errorf("Error getting image: %s", result.Error.Error())
 		return result.Error
 	}
 
