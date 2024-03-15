@@ -56,11 +56,11 @@ func (s *echoServer) Starting() {
 		return err
 	})
 
-	router.GET("/cache", s.CacheGetting)
+	router.GET("/cache/:key", s.CacheGetting)
 	router.DELETE("/cache", s.CacheClearing)
 
 	router.POST("/data", s.DataInserting)
-	router.GET("/data", s.DataGetting)
+	router.GET("/data/:key", s.DataGetting)
 
 	router.POST("/machine", s.MachineStressTesting)
 

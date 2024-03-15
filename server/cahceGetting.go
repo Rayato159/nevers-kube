@@ -11,13 +11,15 @@ import (
 func (s *echoServer) CacheGetting(c echo.Context) error {
 	ctx := context.Background()
 
-	val, err := s.rdb.Get(ctx, "*").Result()
+	key := c.Param("key")
+
+	val, err := s.rdb.Get(ctx, key).Result()
 	if err != nil {
 		return err
 	}
 
-	var resp []*entities.Image
-	json.Unmarshal([]byte(val), &resp)
+	var resp *entities.Image
+	json.Unmarshal([]byte(val), resp)
 
 	return c.JSON(200, resp)
 }

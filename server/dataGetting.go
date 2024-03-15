@@ -8,7 +8,7 @@ import (
 func (s *echoServer) DataGetting(c echo.Context) error {
 	var resp *entities.Image
 
-	key := c.QueryParam("key")
+	key := c.Param("key")
 
 	result := s.db.First(resp).Where("id = ?", key)
 
