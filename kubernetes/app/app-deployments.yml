@@ -21,27 +21,18 @@ spec:
         - name: app-container
           image: lookhin4181/nevers-kube-final:v1.0.6
           env:
-          # - name: DATABASE_HOST
-          #   value: mysql
           - name: DATABASE_HOST
             value: mysql
           - name: DATABASE_PASSWORD
             value:  Pass1234
           - name: DATABASE_USER
             value: root
-          
-          # - name: DATABASE_USER
-          #   value: root
-          # - name: DATABASE_PASSWORD
-          #   value: Pass1234
           - name: DATABASE_PORT
             value: "3306"
           - name: DATABASE_DBNAME
-            value: never-db
+            value: mydb
           - name: SERVER_PORT
             value: "8080"
-          # - name: SERVER_ALLOWORIGINS
-          #   value: ["*"]
           - name: SERVER_BODYLIMIT
             value: "10M"
           ports:
