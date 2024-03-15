@@ -1,13 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-nginx-ingress
+  name: app-ingress
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/app-root: /
 spec:
+  ingressClassName: nginx
   rules:
-  - host: example.com
-    http:
+  - http:
       paths:
       - path: /v1
         pathType: Prefix
