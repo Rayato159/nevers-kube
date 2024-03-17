@@ -15,10 +15,11 @@ func (s *echoServer) CacheGetting(c echo.Context) error {
 
 	val, err := s.rdb.Get(ctx, key).Result()
 	if err != nil {
-		return err
+		s.logger.Error(err)
+		return c.String(500, err.Error())
 	}
 
-	resp := new(entities.Image)
+	var resp entities.Image
 	if err := json.Unmarshal([]byte(val), &resp); err != nil {
 		s.logger.Error(err)
 		return c.String(500, err.Error())
