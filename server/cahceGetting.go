@@ -18,7 +18,7 @@ func (s *echoServer) CacheGetting(c echo.Context) error {
 		return err
 	}
 
-	var resp *entities.Image
+	resp := new(entities.Image)
 	json.Unmarshal([]byte(val), resp)
 
 	return c.JSON(200, resp)
