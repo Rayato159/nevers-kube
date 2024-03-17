@@ -21,9 +21,9 @@ type (
 	}
 
 	RedisConfig struct {
-		Password      string   `mapstructure:"password" validate:"required"`
-		MasterName    string   `mapstructure:"masterName" validate:"required"`
-		SentinelAddrs []string `mapstructure:"sentinelAddrs" validate:"required"`
+		Password      string `mapstructure:"password" validate:"required"`
+		MasterName    string `mapstructure:"masterName" validate:"required"`
+		SentinelAddrs string `mapstructure:"sentinelAddrs" validate:"required"`
 	}
 
 	ServerConfig struct {

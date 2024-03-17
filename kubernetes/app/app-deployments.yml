@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app-container
-          image: lookhin4181/nevers-kube-final:v1.0.13
+          image: lookhin4181/nevers-kube-final:v1.0.14
           env:
           - name: DATABASE_HOST
             value: mysql
@@ -36,8 +36,7 @@ spec:
           - name: REDIS_PASSWORD
             value: admin
           - name: REDIS_SENTINELADDRS
-            value:
-              - sentinel:5000
+            value: sentinel:5000
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -70,8 +69,7 @@ data:
     redis:
       masterName: mymaster
       password: admin
-      sentinelAddrs:
-        - localhost:5000
+      sentinelAddrs: sentinel:5000
 
     database:
       host: localhost
