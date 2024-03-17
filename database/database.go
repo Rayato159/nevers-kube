@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/Rayato159/nevers-kube/config"
+	"github.com/Rayato159/nevers-kube/entities"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -29,6 +30,8 @@ func InstanceGetting(conf *config.DatabaseConfig) *gorm.DB {
 		} else {
 			db = conn
 		}
+
+		db.AutoMigrate(&entities.Image{})
 	})
 
 	return db
