@@ -20,6 +20,12 @@ type (
 		DBName   string `mapstructure:"dbname" validate:"required"`
 	}
 
+	RedisConfig struct {
+		Password      string   `mapstructure:"password" validate:"required"`
+		MasterName    string   `mapstructure:"masterName" validate:"required"`
+		SentinelAddrs []string `mapstructure:"sentinelAddrs" validate:"required"`
+	}
+
 	ServerConfig struct {
 		Port         int      `mapstructure:"port" validate:"required"`
 		AllowOrigins []string `mapstructure:"allowOrigins" validate:"required"`
@@ -28,6 +34,7 @@ type (
 
 	AppConfig struct {
 		DatabaseConfig *DatabaseConfig `mapstructure:"database" validate:"required"`
+		RedisConfig    *RedisConfig    `mapstructure:"redis" validate:"required"`
 		ServerConfig   *ServerConfig   `mapstructure:"server" validate:"required"`
 	}
 )

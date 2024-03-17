@@ -13,13 +13,9 @@ spec:
       labels:
         app: app
     spec:
-      volumes:
-      # - name: app-config
-      #   configMap:
-      #     name: app-config
       containers:
         - name: app-container
-          image: lookhin4181/nevers-kube-final:v1.0.12
+          image: lookhin4181/nevers-kube-final:v1.0.13
           env:
           - name: DATABASE_HOST
             value: mysql
@@ -35,13 +31,16 @@ spec:
             value: "8080"
           - name: SERVER_BODYLIMIT
             value: "10M"
+          - name: REDIS_MASTERNAME
+            value: mymaster
+          - name: REDIS_PASSWORD
+            value: admin
+          - name: REDIS_SENTINELADDRS
+            value:
+              - sentinel:5000
           ports:
             - containerPort: 8080
               protocol: TCP
-          # volumeMounts:
-          # - name: app-config
-          #   mountPath: /app/etc/
-          #   readOnly: true
           livenessProbe:
             httpGet:
               path: /v1/health
@@ -66,14 +65,16 @@ data:
       port: 8080
       allowOrigins:
         - "*"
-      bodyLimit: "10M"
+      bodyLimit: "10M" # MiB
       
     redis:
-      host: localhost
-      port: 6379
-      
+      masterName: mymaster
+      password: admin
+      sentinelAddrs:
+        - localhost:5000
+
     database:
-      host: mysql
+      host: localhost
       port: 3306
       user: root
       password: Pass1234

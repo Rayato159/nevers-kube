@@ -5,8 +5,10 @@ server:
   bodyLimit: "10M" # MiB
   
 redis:
-  host: localhost
-  port: 6379
+  masterName: mymaster
+  password: admin
+  sentinelAddrs:
+    - localhost:5000
 
 database:
   host: localhost

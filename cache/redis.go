@@ -1,12 +1,15 @@
 package cache
 
-import "github.com/redis/go-redis/v9"
+import (
+	"github.com/Rayato159/nevers-kube/config"
+	"github.com/redis/go-redis/v9"
+)
 
-func ExampleClient() *redis.Client {
+func ExampleClient(conf *config.RedisConfig) *redis.Client {
 	rdb := redis.NewFailoverClient(&redis.FailoverOptions{
-		Password:      "admin",
-		MasterName:    "mymaster",
-		SentinelAddrs: []string{"sentinel-0.sentinel:5000", "sentinel-1.sentinel:5000", "sentinel-2.sentinel:5000"},
+		Password:      conf.Password,
+		MasterName:    conf.MasterName,
+		SentinelAddrs: conf.SentinelAddrs,
 	})
 
 	return rdb

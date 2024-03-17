@@ -13,7 +13,7 @@ func main() {
 
 	db := database.InstanceGetting(conf.DatabaseConfig)
 
-	rdb := cache.ExampleClient()
+	rdb := cache.ExampleClient(conf.RedisConfig)
 
 	s := server.ServerInstaceGetting(conf.ServerConfig, db, rdb)
 	s.Starting()
