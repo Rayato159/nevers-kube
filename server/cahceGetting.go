@@ -19,7 +19,7 @@ func (s *echoServer) CacheGetting(c echo.Context) error {
 	}
 
 	resp := new(entities.Image)
-	json.Unmarshal([]byte(val), resp)
+	json.Unmarshal([]byte(val), &resp)
 
 	return c.JSON(200, resp)
 }
