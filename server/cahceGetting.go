@@ -11,7 +11,7 @@ import (
 func (s *echoServer) CacheGetting(c echo.Context) error {
 	ctx := context.Background()
 
-	key := "key"
+	key := c.Param("key")
 
 	val, err := s.rdb.Get(ctx, key).Result()
 	if err != nil {
