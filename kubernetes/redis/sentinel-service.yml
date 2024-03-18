@@ -4,11 +4,10 @@ metadata:
   name: sentinel
   namespace: default
 spec:
-  selector:
-    app: sentinel
+  clusterIP: None
   ports:
   - port: 5000
-    protocol: TCP
     targetPort: 5000
     name: sentinel
-  type: ClusterIP
+  selector:
+    app: sentinel
