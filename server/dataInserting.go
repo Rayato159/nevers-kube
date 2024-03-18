@@ -1,6 +1,7 @@
 package server
 
 import (
+	"bytes"
 	"context"
 	"encoding/base64"
 	"encoding/json"
@@ -13,7 +14,7 @@ import (
 
 func (s *echoServer) DataInserting(c echo.Context) error {
 	ctx := context.Background()
-	key := c.Param("key")
+	key := "key"
 
 	fileHeader, err := c.FormFile("file")
 	if err != nil {
@@ -29,8 +30,8 @@ func (s *echoServer) DataInserting(c echo.Context) error {
 
 	defer file.Close()
 
-	var data []byte
-	_, err = file.Read(data)
+	data := new(bytes.Buffer)
+	_, err = data.ReadFrom(file)
 	if err != nil {
 		s.logger.Error("get file error: ", err.Error())
 		return err
@@ -39,7 +40,7 @@ func (s *echoServer) DataInserting(c echo.Context) error {
 	reqImage := new(entities.Image)
 	uuidV7, _ := uuid.NewV7()
 	reqImage.ID = uuidV7.String()
-	reqImage.ImageBase64 = base64.StdEncoding.EncodeToString(data)
+	reqImage.ImageBase64 = base64.StdEncoding.EncodeToString(data.Bytes())
 
 	reqImageJson, err := json.Marshal(reqImage)
 	if err != nil {
