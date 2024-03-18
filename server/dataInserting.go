@@ -2,6 +2,8 @@ package server
 
 import (
 	"context"
+	"encoding/base64"
+	"encoding/json"
 	"time"
 
 	"github.com/Rayato159/nevers-kube/entities"
@@ -11,16 +13,41 @@ import (
 
 func (s *echoServer) DataInserting(c echo.Context) error {
 	ctx := context.Background()
+	key := c.Param("key")
 
-	reqImage := new(entities.Image)
-	if err := c.Bind(reqImage); err != nil {
+	fileHeader, err := c.FormFile("file")
+	if err != nil {
+		s.logger.Error("get file error: ", err.Error())
 		return err
 	}
 
+	file, err := fileHeader.Open()
+	if err != nil {
+		s.logger.Error("get file error: ", err.Error())
+		return err
+	}
+
+	defer file.Close()
+
+	var data []byte
+	_, err = file.Read(data)
+	if err != nil {
+		s.logger.Error("get file error: ", err.Error())
+		return err
+	}
+
+	reqImage := new(entities.Image)
 	uuidV7, _ := uuid.NewV7()
 	reqImage.ID = uuidV7.String()
+	reqImage.ImageBase64 = base64.StdEncoding.EncodeToString(data)
 
-	if result := s.rdb.Set(ctx, reqImage.ID, reqImage.ImageBase64, 5*time.Minute); result.Err() != nil {
+	reqImageJson, err := json.Marshal(reqImage)
+	if err != nil {
+		s.logger.Error("Error sequenced json data: ", err.Error())
+		return err
+	}
+
+	if result := s.rdb.Set(ctx, key, string(reqImageJson), 5*time.Minute); result.Err() != nil {
 		s.logger.Errorf("Error setting cache: %s", result.Err().Error())
 		return result.Err()
 	}

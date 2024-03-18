@@ -36,7 +36,7 @@ spec:
           - name: REDIS_PASSWORD
             value: admin
           - name: REDIS_SENTINELADDRS
-            value: sentinel:5000
+            value: sentinel-0.sentinel:5000,sentinel-1.sentinel:5000,sentinel-2.sentinel:5000
           ports:
             - containerPort: 8080
               protocol: TCP
