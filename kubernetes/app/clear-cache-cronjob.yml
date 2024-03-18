@@ -4,7 +4,7 @@ metadata:
  name: clear-cache-cronjob
  namespace: default
 spec:
- schedule: "2 * * * *"
+ schedule: "10 * * * *"
  jobTemplate:
     spec:
       template:
