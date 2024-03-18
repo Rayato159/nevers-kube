@@ -18,4 +18,11 @@ spec:
             - -c
             - |
               curl -X DELETE http://app-service:8080/v1/cache
+            startupProbe:
+              httpGet:
+                path: /health
+                port: 8080
+              initialDelaySeconds: 5
+              periodSeconds: 5
+              failureThreshold: 3
           restartPolicy: OnFailure
