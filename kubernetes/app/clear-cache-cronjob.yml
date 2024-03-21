@@ -17,11 +17,11 @@ spec:
             - /bin/sh
             - -c
             - |
-              curl -X DELETE http://app-service:8080/v1/cache
+              curl -X DELETE http://app-service/api/v1/cache
             startupProbe:
               httpGet:
                 path: /health
-                port: 8080
+                port: 80
               initialDelaySeconds: 5
               periodSeconds: 5
               failureThreshold: 3

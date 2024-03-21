@@ -10,10 +10,10 @@ spec:
   - host: example.com
     http:
       paths:
-      - path: /v1
+      - path: /api
         pathType: Prefix
         backend:
           service:
             name: app-service
             port:
-              number: 8080
+              number: 80

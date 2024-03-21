@@ -16,64 +16,30 @@ spec:
       containers:
         - name: app-container
           image: lookhin4181/nevers-kube-final:v1.0.20
-          env:
-          - name: DATABASE_HOST
-            value: mysql
-          - name: DATABASE_PASSWORD
-            value:  Pass1234
-          - name: DATABASE_USER
-            value: root
-          - name: DATABASE_PORT
-            value: "3306"
-          - name: DATABASE_DBNAME
-            value: mydb
-          - name: SERVER_PORT
-            value: "8080"
-          - name: SERVER_BODYLIMIT
-            value: "10M"
-          - name: REDIS_MASTERNAME
-            value: mymaster
-          - name: REDIS_PASSWORD
-            value: admin
-          - name: REDIS_SENTINELADDRS
-            value: sentinel-0.sentinel:5000,sentinel-1.sentinel:5000,sentinel-2.sentinel:5000
+          envFrom:
+          - configMapRef:
+              name: app-env
+          - secretRef:
+              name: app-secret-env
           ports:
-            - containerPort: 8080
+            - containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /v1/health
-              port: 8080
+              path: /health
+              port: 80
             initialDelaySeconds: 3
             periodSeconds: 3
           readinessProbe:
             httpGet:
-              path: /v1/health
-              port: 8080
+              path: /health
+              port: 80
             initialDelaySeconds: 3
             periodSeconds: 3
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-config
-  namespace: default
-data:
-  config.yaml: |
-    server:
-      port: 8080
-      allowOrigins:
-        - "*"
-      bodyLimit: "10M" # MiB
-      
-    redis:
-      masterName: mymaster
-      password: admin
-      sentinelAddrs: sentinel:5000
-
-    database:
-      host: localhost
-      port: 3306
-      user: root
-      password: Pass1234
-      dbname: mydb
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "512Mi" 
+              cpu: "1000m" # 1 core

@@ -33,7 +33,7 @@ func ServerInstaceGetting(conf *config.ServerConfig, db *gorm.DB, rdb *redis.Cli
 }
 
 func (s *echoServer) Starting() {
-	router := s.app.Group("/v1")
+	router := s.app.Group("/api/v1")
 
 	s.app.Use(middleware.Recover())
 	s.app.Use(middleware.Logger())
@@ -45,7 +45,7 @@ func (s *echoServer) Starting() {
 	}))
 	s.app.Use(middleware.BodyLimit(s.conf.BodyLimit))
 
-	router.GET("/health", func(c echo.Context) error {
+	s.app.GET("/health", func(c echo.Context) error {
 		s.logger.Info("Health check request received")
 		err := c.String(http.StatusOK, "OK")
 		if err != nil {
