@@ -17,7 +17,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              curl -X DELETE http://app-service:8080/v1/cache
+              curl -X DELETE http://app-service:8080/api/v1/cache
             startupProbe:
               httpGet:
                 path: /health
