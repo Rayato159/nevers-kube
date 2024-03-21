@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-env
+data:
+  DATABASE_HOST: "mysql"
+  DATABASE_USER: "root"
+  DATABASE_PORT: "3306"
+  DATABASE_DBNAME: "mydb"
+  SERVER_PORT: "80"
+  SERVER_BODYLIMIT: "10M"
+  REDIS_MASTERNAME: "mymaster"
+  REDIS_SENTINELADDRS: "sentinel-0.sentinel:5000,sentinel-1.sentinel:5000,sentinel-2.sentinel:5000"

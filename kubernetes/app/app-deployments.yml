@@ -16,27 +16,11 @@ spec:
       containers:
         - name: app-container
           image: lookhin4181/nevers-kube-final:v1.0.20
-          env:
-            - name: DATABASE_HOST
-              value: mysql
-            - name: DATABASE_PASSWORD
-              value: Pass1234
-            - name: DATABASE_USER
-              value: root
-            - name: DATABASE_PORT
-              value: "3306"
-            - name: DATABASE_DBNAME
-              value: mydb
-            - name: SERVER_PORT
-              value: "80"
-            - name: SERVER_BODYLIMIT
-              value: "10M"
-            - name: REDIS_MASTERNAME
-              value: mymaster
-            - name: REDIS_PASSWORD
-              value: admin
-            - name: REDIS_SENTINELADDRS
-              value: sentinel-0.sentinel:5000,sentinel-1.sentinel:5000,sentinel-2.sentinel:5000
+          envFrom:
+          - configMapRef:
+              name: app-env
+          - secretRef:
+              name: app-secret-env
           ports:
             - containerPort: 80
               protocol: TCP
